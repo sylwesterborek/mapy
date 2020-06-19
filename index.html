@@ -27,7 +27,7 @@
 
   /* Set up the initial map center and zoom level */
   var map = L.map('map', {
-    center: [19.09, 50.30], // EDIT latitude, longitude to re-center map
+    center: [50.30, 19.09], // EDIT latitude, longitude to re-center map
     zoom: 12,  // EDIT from 1 to 18 -- decrease to zoom out, increase to zoom in
     scrollWheelZoom: false
   });
@@ -38,7 +38,7 @@
   }).addTo(map);
 
   /* Display a point marker with pop-up text */
-  L.marker([19.09, 50.30]).addTo(map) // EDIT latitude, longitude to re-position marker
+  L.marker([50.30, 19.09]).addTo(map) // EDIT latitude, longitude to re-position marker
   .bindPopup("Insert pop-up text here"); // EDIT pop-up text message
 
   </script>
