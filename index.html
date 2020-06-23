@@ -22,7 +22,7 @@
 <body>
 
   <!-- Display the map and title with HTML division tags  -->
-  <div id="map-title">Czeladź Piaski 1331</div>
+  <div id="map-title">Czeladź Piaski 1334</div>
   <div id="map"></div>
 
   <!-- Create the interactive map content with JavaScript (.js) -->
@@ -37,38 +37,50 @@
   
    /* Control panel to display map layers */
   var controlLayers = L.control.layers( null, null, {
-  position: "topright",
-  collapsed: false
+   position: "topright",
+   collapsed: false
   }).addTo(map);
- 
-    
+
   /* Carto light-gray basemap tiles with labels */
   var light = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
-  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
   }).addTo(map); // EDIT - insert or remove ".addTo(map)" before last semicolon to display by default
-   controlLayers.addBaseLayer(light, 'Carto Light mapa');
+  controlLayers.addBaseLayer(light, 'Carto Light basemap');
+
   /* Stamen colored terrain basemap tiles with labels */
   var terrain = L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png', {
-  attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
+    attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
   }); // EDIT - insert or remove ".addTo(map)" before last semicolon to display by default
-   controlLayers.addBaseLayer(terrain, 'Stamen Terrain mapa');   
-    
-    
-  /* Display a point marker with pop-up text */
-   L.marker([50.30, 19.09]).addTo(map) // EDIT latitude, longitude to re-position marker
-   .bindPopup("Insert pop-up text here"); // EDIT pop-up text message
-    
- /* Upload Latitude/Longitude markers from data.csv file, show Title in pop-up, and override initial center and zoom to fit all in map */
+  controlLayers.addBaseLayer(terrain, 'Stamen Terrain basemap');
+
+
+
+  // display Carto basemap tiles with light features and labels
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
+  }).addTo(map); // EDIT - insert or remove ".addTo(map)" before last semicolon to display by default
+
+  // display Stamen basemap tiles with colored terrain and labels
+  L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png', {
+    attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
+  }); // EDIT - insert or remove ".addTo(map)" before last semicolon to display by default
+
+  // see more basemap options at https://leaflet-extras.github.io/leaflet-providers/preview/
+
+
+  // upload CSV file from local directory and display latitude and longitude coordinates as default blue markers on map
   var customLayer = L.geoJson(null, {
-  onEachFeature: function(feature, layer) {
-    layer.bindPopup(feature.properties.Title);
-   }
+    onEachFeature: function(feature, layer) {
+      layer.bindPopup(feature.properties.Title);
+      }
   });
+
   var runLayer = omnivore.csv('data.csv', null, customLayer)
-  .on('ready', function() {
-   map.fitBounds(runLayer.getBounds());
-  }).addTo(map);
-  controlLayers.addOverlay(customLayer, 'Markers from data.csv');
+      .on('ready', function() {
+          // http://leafletjs.com/reference.html#map-fitbounds
+          map.fitBounds(runLayer.getBounds());
+      })
+      .addTo(map);
   </script>
 </body>
 </html>
