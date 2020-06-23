@@ -22,7 +22,7 @@
 <body>
 
   <!-- Display the map and title with HTML division tags  -->
-  <div id="map-title">Czeladź Piaski 1313</div>
+  <div id="map-title">Czeladź Piaski 1316</div>
   <div id="map"></div>
 
   <!-- Create the interactive map content with JavaScript (.js) -->
@@ -54,9 +54,9 @@
    controlLayers.addBaseLayer(terrain, 'Stamen Terrain mapa');   
     
     
-  /* Display a point marker with pop-up text */
-  // L.marker([50.30, 19.09]).addTo(map) // EDIT latitude, longitude to re-position marker
-  // .bindPopup("Insert pop-up text here"); // EDIT pop-up text message
+  * Display a point marker with pop-up text */
+   L.marker([50.30, 19.09]).addTo(map) // EDIT latitude, longitude to re-position marker
+   .bindPopup("Insert pop-up text here"); // EDIT pop-up text message
     
  /* Upload Latitude/Longitude markers from data.csv file, show Title in pop-up, and override initial center and zoom to fit all in map */
   var customLayer = L.geoJson(null, {
