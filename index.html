@@ -22,7 +22,7 @@
 <body>
 
   <!-- Display the map and title with HTML division tags  -->
-  <div id="map-title">Czeladź Piaski 1316</div>
+  <div id="map-title">Czeladź Piaski 1318</div>
   <div id="map"></div>
 
   <!-- Create the interactive map content with JavaScript (.js) -->
@@ -68,7 +68,7 @@
   .on('ready', function() {
    map.fitBounds(runLayer.getBounds());
   }).addTo(map);
-  //controlLayers.addOverlay(customLayer, 'Markers from data.csv');
+  controlLayers.addOverlay(customLayer, 'Markers from data.csv');
   </script>
 </body>
 </html>
